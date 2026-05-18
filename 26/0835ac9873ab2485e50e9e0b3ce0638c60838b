@@ -1,0 +1,23 @@
+tests/ArchLens.Orchestrator.Tests/Application/UseCases/Sagas/Queries/List/ListSagasHandlerTests.cs
+  s_0fe0b0ea232cb8::t_cbd200a876171b 66,75
+  s_0fe0b0ea232cb8::t_31d3780516a108 88
+  s_0fe0b0ea232cb8::t_71702b194cf8c8 29,47,107,116
+  s_0fe0b0ea232cb8::t_2f7dc4cb0a5aa6 126,135
+  s_0fe0b0ea232cb8::t_abb8d7802f897e 145,154
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "260835ac9873ab2485e50e9e0b3ce0638c60838b",
+  "prompts": {},
+  "sessions": {
+    "s_0fe0b0ea232cb8": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "c8683f97-9450-43bf-9576-6863b496e20f",
+        "model": "claude-opus-4-7-thinking-xhigh"
+      },
+      "human_author": "Rafael Pereira <66394829+rafahenrique1@users.noreply.github.com>"
+    }
+  }
+}
