@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using ArchLens.Orchestrator.Api.Controllers;
 using ArchLens.Orchestrator.Application.Contracts.DTOs.SagaDTOs;
 using ArchLens.Orchestrator.Application.Contracts.Interfaces;
@@ -6,6 +7,7 @@ using ArchLens.Orchestrator.Application.UseCases.Sagas.Queries.List;
 using ArchLens.SharedKernel.Application;
 using FluentAssertions;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 
@@ -13,6 +15,8 @@ namespace ArchLens.Orchestrator.Tests.Api.Controllers;
 
 public class SagaControllerTests
 {
+    private const string TestUserId = "test-user-123";
+
     private readonly IMediator _mediator;
     private readonly ISagaStateRepository _sagaRepo;
     private readonly SagaController _sut;
@@ -21,7 +25,18 @@ public class SagaControllerTests
     {
         _mediator = Substitute.For<IMediator>();
         _sagaRepo = Substitute.For<ISagaStateRepository>();
-        _sut = new SagaController(_mediator, _sagaRepo);
+        _sut = new SagaController(_mediator, _sagaRepo)
+        {
+            ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext
+                {
+                    User = new ClaimsPrincipal(new ClaimsIdentity(
+                        new[] { new Claim(ClaimTypes.NameIdentifier, TestUserId) },
+                        authenticationType: "Test")),
+                },
+            },
+        };
     }
 
     [Fact]
