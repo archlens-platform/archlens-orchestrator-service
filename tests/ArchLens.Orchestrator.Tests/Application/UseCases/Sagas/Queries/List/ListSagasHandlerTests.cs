@@ -26,7 +26,7 @@ public class ListSagasHandlerTests
             CreateSagaStatusResponse(),
             CreateSagaStatusResponse()
         };
-        _repository.ListAsync(1, 20, Arg.Any<CancellationToken>())
+        _repository.ListAsync(1, 20, Arg.Any<string?>(), Arg.Any<CancellationToken>())
             .Returns(items.AsReadOnly());
 
         var query = new ListSagasQuery(1, 20);
@@ -44,7 +44,7 @@ public class ListSagasHandlerTests
     {
         // Arrange
         var items = new List<SagaStatusResponse>();
-        _repository.ListAsync(1, 20, Arg.Any<CancellationToken>())
+        _repository.ListAsync(1, 20, Arg.Any<string?>(), Arg.Any<CancellationToken>())
             .Returns(items.AsReadOnly());
 
         var query = new ListSagasQuery(1, 20);
@@ -63,7 +63,7 @@ public class ListSagasHandlerTests
     {
         // Arrange
         var items = new List<SagaStatusResponse>();
-        _repository.ListAsync(3, 10, Arg.Any<CancellationToken>())
+        _repository.ListAsync(3, 10, Arg.Any<string?>(), Arg.Any<CancellationToken>())
             .Returns(items.AsReadOnly());
 
         var query = new ListSagasQuery(3, 10);
@@ -72,7 +72,7 @@ public class ListSagasHandlerTests
         await _sut.Handle(query, CancellationToken.None);
 
         // Assert
-        await _repository.Received(1).ListAsync(3, 10, Arg.Any<CancellationToken>());
+        await _repository.Received(1).ListAsync(3, 10, Arg.Any<string?>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public class ListSagasHandlerTests
             CreateSagaStatusResponse(),
             CreateSagaStatusResponse()
         };
-        _repository.ListAsync(2, 10, Arg.Any<CancellationToken>())
+        _repository.ListAsync(2, 10, Arg.Any<string?>(), Arg.Any<CancellationToken>())
             .Returns(items.AsReadOnly());
 
         var query = new ListSagasQuery(2, 10);
@@ -104,7 +104,7 @@ public class ListSagasHandlerTests
     {
         // Arrange
         var items = new List<SagaStatusResponse>();
-        _repository.ListAsync(1, 20, Arg.Any<CancellationToken>())
+        _repository.ListAsync(1, 20, Arg.Any<string?>(), Arg.Any<CancellationToken>())
             .Returns(items.AsReadOnly());
 
         var query = new ListSagasQuery();
@@ -113,7 +113,7 @@ public class ListSagasHandlerTests
         await _sut.Handle(query, CancellationToken.None);
 
         // Assert
-        await _repository.Received(1).ListAsync(1, 20, Arg.Any<CancellationToken>());
+        await _repository.Received(1).ListAsync(1, 20, Arg.Any<string?>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -123,7 +123,7 @@ public class ListSagasHandlerTests
         using var cts = new CancellationTokenSource();
         var ct = cts.Token;
         var items = new List<SagaStatusResponse>();
-        _repository.ListAsync(1, 20, ct)
+        _repository.ListAsync(1, 20, Arg.Any<string?>(), ct)
             .Returns(items.AsReadOnly());
 
         var query = new ListSagasQuery();
@@ -132,7 +132,7 @@ public class ListSagasHandlerTests
         await _sut.Handle(query, ct);
 
         // Assert
-        await _repository.Received(1).ListAsync(1, 20, ct);
+        await _repository.Received(1).ListAsync(1, 20, Arg.Any<string?>(), ct);
     }
 
     [Theory]
@@ -142,7 +142,7 @@ public class ListSagasHandlerTests
     {
         // Arrange - PagedRequest clamps page < 1 to 1
         var items = new List<SagaStatusResponse>();
-        _repository.ListAsync(expectedPage, pageSize, Arg.Any<CancellationToken>())
+        _repository.ListAsync(expectedPage, pageSize, Arg.Any<string?>(), Arg.Any<CancellationToken>())
             .Returns(items.AsReadOnly());
 
         var query = new ListSagasQuery(inputPage, pageSize);
@@ -151,7 +151,7 @@ public class ListSagasHandlerTests
         var result = await _sut.Handle(query, CancellationToken.None);
 
         // Assert
-        await _repository.Received(1).ListAsync(expectedPage, pageSize, Arg.Any<CancellationToken>());
+        await _repository.Received(1).ListAsync(expectedPage, pageSize, Arg.Any<string?>(), Arg.Any<CancellationToken>());
     }
 
     private static SagaStatusResponse CreateSagaStatusResponse()
