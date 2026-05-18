@@ -1,0 +1,19 @@
+tests/ArchLens.Orchestrator.Tests/Api/Controllers/SagaControllerTests.cs
+  s_0fe0b0ea232cb8::t_5d43f485072ad3 1,10,18-19,28-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "d9513ac82aea52fc90a46ed40b8c7b7c2c250030",
+  "prompts": {},
+  "sessions": {
+    "s_0fe0b0ea232cb8": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "c8683f97-9450-43bf-9576-6863b496e20f",
+        "model": "claude-opus-4-7-thinking-xhigh"
+      },
+      "human_author": "Rafael Pereira <66394829+rafahenrique1@users.noreply.github.com>"
+    }
+  }
+}
